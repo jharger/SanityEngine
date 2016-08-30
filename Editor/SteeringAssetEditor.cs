@@ -10,8 +10,6 @@ public class SteeringAssetEditor : Editor {
 	
 	public override void OnInspectorGUI()
 	{
-		EditorGUIUtility.LookLikeInspector();
-		
 		SteeringBehaviorAsset sab = (SteeringBehaviorAsset)target;
 		EditorGUILayout.BeginVertical();
 

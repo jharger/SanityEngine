@@ -4,9 +4,8 @@ using SanityEngine.Actors;
 using SanityEngine.Movement.SteeringBehaviors;
 using SanityEngine.Movement.PathFollowing;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 using SanityEngine.Structure.Path;
-using SanityEngine.Search.PathFinding;
 using SanityEngine.Search.PathFinding.Algorithms;
 using SanityEngine.Utility.Heuristics;
 
@@ -23,10 +22,10 @@ public class PathFollowerComponent : MonoBehaviour {
 	SteeringManagerComponent manager;
 	PointActor target;
 	ASearch finder;
-	NavMesh navMesh;
+    NavigationGraph graph;
 	Path path;
 	CoherentPathFollower follower;
-	NavMeshNode goalNode;
+    NavigationGraphNode goalNode;
 	List<MonoBehaviour> listeners;
 	float prevParam;
 	Vector3 prevPoint;
@@ -93,12 +92,12 @@ public class PathFollowerComponent : MonoBehaviour {
 		prevPoint = point;
 	}
 	
-	void SetNavMesh(NavMesh navMesh)
+	void SetNavigationGraph(NavigationGraph graph)
 	{
-		this.navMesh = navMesh;
+		this.graph = graph;
 	}
 	
-	void SetGoalNode(NavMeshNode goal)
+	void SetGoalNode(NavigationGraphNode goal)
 	{
 		if(goal == null) {
 			ClearGoalNode();
@@ -134,8 +133,8 @@ public class PathFollowerComponent : MonoBehaviour {
 		Gizmos.color = Color.white;
 		for(int i=0;i<path.StepCount;i++) {
 			Edge edge = path.GetStep(i);
-			NavMeshNode src = (NavMeshNode)edge.Source;
-			NavMeshNode tgt = (NavMeshNode)edge.Target;
+			NavigationGraphNode src = (NavigationGraphNode)edge.Source;
+            NavigationGraphNode tgt = (NavigationGraphNode)edge.Target;
 			Gizmos.DrawSphere(tgt.Position, 0.1f);
 			Gizmos.DrawLine(src.Position, tgt.Position);
 		}
@@ -143,7 +142,7 @@ public class PathFollowerComponent : MonoBehaviour {
 	
 	void FindNewPath()
 	{
-		path = finder.Search(navMesh, navMesh.Quantize(transform.position), goalNode);
+		path = finder.Search(graph, graph.Quantize(transform.position), goalNode);
 		if(path == null) {
 			ClearGoalNode();
 			SendPathMessage("OnPathNotFound");

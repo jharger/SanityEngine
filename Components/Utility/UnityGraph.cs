@@ -1,10 +1,8 @@
 using UnityEngine;
-using System.Collections;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 
-public abstract class UnityGraph : MonoBehaviour,
-	NavMesh
+public abstract class UnityGraph : MonoBehaviour, NavigationGraph
 {
 
 	// Use this for initialization
@@ -34,5 +32,5 @@ public abstract class UnityGraph : MonoBehaviour,
 
     public abstract Edge GetInEdge(Node node, int index);
 	
-   	public abstract NavMeshNode Quantize(Vector3 pos);
+   	public abstract NavigationGraphNode Quantize(Vector3 pos);
 }

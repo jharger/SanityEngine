@@ -3,11 +3,6 @@ using System.Collections;
 
 [AddComponentMenu("Sanity Engine/Actors/Static Actor")]
 public class StaticActor : GameObjectActor {
-	Transform xform;
-	
-	void Start () {
-		xform = transform;
-	}
 	
 	public override Vector3 Velocity
     {
@@ -21,21 +16,21 @@ public class StaticActor : GameObjectActor {
 	
     public override Vector3 Position
     {
-        get { return xform.position; }
+        get { return transform.position; }
     }
 
     public override Vector3 Forward
     {
-        get { return xform.forward; }
+        get { return transform.forward; }
     }
 
 	public override Vector3 Right
     {
-        get { return xform.right; }
+        get { return transform.right; }
     }
     
 	public override Vector3 Up
     {
-        get { return xform.up; }
+        get { return transform.up; }
     }
 }

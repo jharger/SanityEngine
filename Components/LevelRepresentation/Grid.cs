@@ -9,7 +9,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 
 [AddComponentMenu("Sanity Engine/Level Representation/Grid"),
 	ExecuteInEditMode()]
@@ -59,8 +59,8 @@ public class Grid : UnityGraph
 	}
 
 	[System.Serializable]
-	public class GridCell : NavMeshNode
-	{
+	public class GridCell : NavigationGraphNode
+    {
 		public float[] edges;
 		public Vector3 Position
 		{
@@ -688,7 +688,7 @@ public class Grid : UnityGraph
 		return new GridEdge(source, target, source.edges[edgeIndex]);
 	}
 
-	public override NavMeshNode Quantize (Vector3 pos)
+	public override NavigationGraphNode Quantize (Vector3 pos)
 	{
 		Vector3 p = transform.InverseTransformPoint (pos);
 		float xSize = parameters.xSize;

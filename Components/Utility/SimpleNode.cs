@@ -7,11 +7,10 @@
 // For more information, see the file LICENSE
 
 using UnityEngine;
-using System.Collections.Generic;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 
-public class SimpleNode : NavMeshNode
+public class SimpleNode : NavigationGraphNode
 {
 	public Vector3 Position
 	{

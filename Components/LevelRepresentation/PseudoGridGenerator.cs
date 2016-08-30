@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
 
 [AddComponentMenu("Sanity Engine/Level Representation/Pseudo-Grid Generator"),
 ExecuteInEditMode()]
@@ -375,7 +374,7 @@ public class PseudoGridGenerator// : UnityGraph
     	helper.Reset();
     }
         
-   	public override NavMeshNode Quantize(Vector3 pos)
+   	public override NavigationGraphNode Quantize(Vector3 pos)
    	{
    		// FIXME this is slow
    		float minDist = float.PositiveInfinity;

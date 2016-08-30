@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Text;
 using SanityEngine.Structure.Path;
 using SanityEngine.Structure.Graph;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 
 namespace SanityEngine.Movement.PathFollowing
 {
@@ -55,8 +55,8 @@ namespace SanityEngine.Movement.PathFollowing
 			for(int i = 0;i < path.StepCount; i ++) {
                 Edge edge = path.GetStep(i);
 				Segment s = new Segment();
-				NavMeshNode src = (NavMeshNode)edge.Source;
-				NavMeshNode tgt = (NavMeshNode)edge.Target;
+                NavigationGraphNode src = (NavigationGraphNode)edge.Source;
+                NavigationGraphNode tgt = (NavigationGraphNode)edge.Target;
 				Vector3 pos1 = src.Position;
                 Vector3 pos2 = tgt.Position;
 				s.origin = pos1;

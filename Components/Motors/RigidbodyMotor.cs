@@ -10,7 +10,6 @@ public class RigidbodyMotor : SteeringManagerComponent {
 	public float maxTorque = 720.0f;
 	public float maxAngularSpeed = 1080.0f;
 	Rigidbody body;
-	Transform xform;
 	Vector3 kinematicAngularVelocity;
 	
 	protected override float MaxForce
@@ -25,8 +24,7 @@ public class RigidbodyMotor : SteeringManagerComponent {
 	
 	void Start ()
 	{
-		body = rigidbody;
-		xform = transform;
+		body = GetComponent<Rigidbody>();
 		kinematicAngularVelocity = Vector3.zero;
 	}
 	
@@ -51,10 +49,10 @@ public class RigidbodyMotor : SteeringManagerComponent {
 			float t = Time.fixedDeltaTime;
 			Vector3 angAccel = steering.Torque / body.mass;
 	
-			xform.Rotate(kinematicAngularVelocity * t + angAccel * t * t, Space.World);
+			transform.Rotate(kinematicAngularVelocity * t + angAccel * t * t, Space.World);
 
 			kinematicAngularVelocity += angAccel * t;
-			kinematicAngularVelocity -= kinematicAngularVelocity * rigidbody.angularDrag;
+			kinematicAngularVelocity -= kinematicAngularVelocity * body.angularDrag;
 			float angSpeed = kinematicAngularVelocity.magnitude;
 			if(angSpeed > maxAngularSpeed) {
 				kinematicAngularVelocity *= maxAngularSpeed / angSpeed;

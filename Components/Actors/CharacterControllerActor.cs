@@ -5,7 +5,6 @@ using SanityEngine.Movement.SteeringBehaviors;
 [AddComponentMenu("Sanity Engine/Actors/Character Controller Actor"),
  RequireComponent(typeof(CharacterController))]
 public class CharacterControllerActor : GameObjectActor {
-	Transform xform;
 	Vector3 oldPosition;
 	Vector3 oldRotation;
 	Vector3 velocity;
@@ -16,11 +15,10 @@ public class CharacterControllerActor : GameObjectActor {
 	{
 		velocity = Vector3.zero;
 		angularVelocity = Vector3.zero;
-		xform = transform;
 		motor = GetComponent<CharacterControllerMotor>();
 		
-		oldPosition = xform.position;
-		oldRotation = xform.rotation.eulerAngles;
+		oldPosition = transform.position;
+		oldRotation = transform.rotation.eulerAngles;
 	}
 	
 	void FixedUpdate()
@@ -30,10 +28,10 @@ public class CharacterControllerActor : GameObjectActor {
 			angularVelocity = motor.AngularVelocity;
 		} else {
 			float scale = 1f / Time.deltaTime;
-			velocity = (xform.position - oldPosition) * scale;
-			Vector3 rot = xform.rotation.eulerAngles;
+			velocity = (transform.position - oldPosition) * scale;
+			Vector3 rot = transform.rotation.eulerAngles;
 			angularVelocity = (rot - oldRotation) * scale;
-			oldPosition = xform.position;
+			oldPosition = transform.position;
 			oldRotation = rot;
 		}
 	}
@@ -50,21 +48,21 @@ public class CharacterControllerActor : GameObjectActor {
 	
     public override Vector3 Position
     {
-        get { return xform.position; }
+        get { return transform.position; }
     }
 
     public override Vector3 Forward
     {
-        get { return xform.forward; }
+        get { return transform.forward; }
     }
 
 	public override Vector3 Right
     {
-        get { return xform.right; }
+        get { return transform.right; }
     }
     
 	public override Vector3 Up
     {
-        get { return xform.up; }
+        get { return transform.up; }
     }
 }

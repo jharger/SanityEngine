@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using SanityEngine.Structure.Graph.NavMesh;
+using SanityEngine.Structure.Graph.NavigationGraph;
 
 [AddComponentMenu("Sanity Engine/User Interaction/Nearest Mouse Interactor")]
 public class NearestMouseInteractor : MonoBehaviour {
@@ -29,9 +28,9 @@ public class NearestMouseInteractor : MonoBehaviour {
 		Ray ray = Camera.main.ScreenPointToRay(pos);
 		RaycastHit hit;
 		if(Physics.Raycast(ray, out hit, Mathf.Infinity, clickLayerMask.value)) {
-			NavMeshNode node = grid.Quantize(hit.point);
+			NavigationGraphNode node = grid.Quantize(hit.point);
 			if(node != null) {
-				SendMessage("SetNavMesh", grid);
+				SendMessage("SetNavigationGraph", grid);
 				SendMessage("SetGoalNode", node);
 			}
 		}

@@ -5,13 +5,11 @@ using SanityEngine.Movement.SteeringBehaviors;
 [AddComponentMenu("Sanity Engine/Actors/Rigid Body Actor")]
 [RequireComponent(typeof(Rigidbody))]
 public class RigidbodyActor : GameObjectActor {
-	Rigidbody body;
-	Transform xform;
-	
+    Rigidbody body;
+
 	void Awake()
 	{
-		body = rigidbody;
-		xform = transform;
+		body = GetComponent<Rigidbody>();
 	}
 	
 	public override Vector3 Velocity
@@ -26,21 +24,21 @@ public class RigidbodyActor : GameObjectActor {
 	
     public override Vector3 Position
     {
-        get { return xform.position; }
+        get { return transform.position; }
     }
 
     public override Vector3 Forward
     {
-        get { return xform.forward; }
+        get { return transform.forward; }
     }
 
 	public override Vector3 Right
     {
-        get { return xform.right; }
+        get { return transform.right; }
     }
     
 	public override Vector3 Up
     {
-        get { return xform.up; }
+        get { return transform.up; }
     }
 }
